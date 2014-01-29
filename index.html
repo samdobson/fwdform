@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>fwdform by samdobson</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">fwdform</h1>
+        <p class="header">Quickstart contact form processing for static sites</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/samdobson/fwdform/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/samdobson/fwdform/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/samdobson/fwdform">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/samdobson">samdobson</a></p>
+
+
+      </header>
+      <section>
+        <h2>
+<a name="quickstart-contact-form-processing" class="anchor" href="#quickstart-contact-form-processing"><span class="octicon octicon-link"></span></a>Quickstart contact form processing</h2>
+
+<p>This will be useful if...</p>
+
+<ul>
+<li>You want to forward a simple contact form to your email</li>
+<li>You have a (S3) static site and don't want to run a server</li>
+</ul><h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Register your email:</p>
+
+<div class="highlight highlight-bash"><pre>    <span class="nv">$ </span>curl --data <span class="s2">"email=&lt;your_email&gt;"</span> https://fwdform.herokuapp.com/register
+    Token: 780a8c9b-dc2d-4258-83af-4deefe446dee
+
+</pre></div>
+
+<p>Test (optional):</p>
+
+<div class="highlight highlight-bash"><pre>    <span class="nv">$ </span>curl --data <span class="s2">"email=person@form.com&amp;name=person&amp;message=hello"</span> <span class="se">\</span>
+           https://fwdform.herokuapp.com/user/&lt;token&gt;
+</pre></div>
+
+<p>Put into action:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"https://fwdform.herokuapp.com/user/&lt;token&gt;"</span><span class="nt">&gt;</span>
+  Email: <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"name"</span><span class="nt">&gt;&lt;br&gt;</span>
+  Name: <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"email"</span><span class="nt">&gt;&lt;br&gt;</span>
+  Message: <span class="nt">&lt;textarea</span> <span class="na">name=</span><span class="s">"message"</span> <span class="na">cols=</span><span class="s">"40"</span> <span class="na">rows=</span><span class="s">"5"</span><span class="nt">&gt;&lt;/textarea&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"Send Message"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span> 
+</pre></div>
+
+<p>NB: Required parameters are: <code>email</code>, <code>name</code> and <code>message</code>. Other parameters will be ignored.</p>
+
+<h2>
+<a name="privacy-concerns" class="anchor" href="#privacy-concerns"><span class="octicon octicon-link"></span></a>Privacy concerns?</h2>
+
+<p>Spin up your own free <a href="http://www.heroku.com">Heroku</a> instance. A <a href="http://mandrill.com">Mandrill</a> account required for email delivery.</p>
+
+<div class="highlight highlight-bash"><pre>    <span class="nv">$ </span>git clone https://github.com/samdobson/fwdform.git
+    <span class="nv">$ </span>heroku create
+    <span class="nv">$ </span>heroku config:set <span class="nv">MANDRILL_API_KEY</span><span class="o">=</span>&lt;KEY&gt;
+    <span class="nv">$ </span>heroku addons:add heroku-postgresql:dev
+    <span class="nv">$ </span>heroku pg:promote HEROKU_POSTGRESQL_COLOR
+    <span class="nv">$ </span>heroku ps:scale <span class="nv">web</span><span class="o">=</span>1
+</pre></div>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
