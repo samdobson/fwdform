@@ -2,10 +2,12 @@ import os
 from uuid import uuid4
 
 from mandrill import Mandrill
+from flask.ext.cors import CORS
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask import Flask, request, redirect, abort
 
 app = Flask(__name__)
+cors = CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 mandrill_client = Mandrill(os.environ['MANDRILL_API_KEY'])
 db = SQLAlchemy(app)
