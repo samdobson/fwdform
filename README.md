@@ -51,3 +51,18 @@ Spin up your own free [Heroku](http://www.heroku.com) instance. A [Mandrill](htt
     $ heroku ps:scale web=1
 ```
 
+Deploy the application to your Heroku instance.
+
+```bash
+    $ git push heroku master
+```
+
+Create the database.
+
+```bash
+    $ heroku run python
+    >>> from app import db
+    >>> db.create_all()
+    >>> exit()
+```
+
