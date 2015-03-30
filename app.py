@@ -9,6 +9,8 @@ from flask import Flask, request, redirect, abort
 app = Flask(__name__)
 cors = CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+index_redirect_url = os.environ.get('INDEX_REDIRECT_URL') or \
+                    'http://samdobson.github.io/fwdform'
 mandrill_client = Mandrill(os.environ['MANDRILL_API_KEY'])
 db = SQLAlchemy(app)
 
@@ -24,7 +26,7 @@ class User(db.Model):
 
 @app.route('/')
 def index():
-    return redirect('http://samdobson.github.io/fwdform')
+    return redirect(index_redirect_url)
 
 @app.route('/register', methods=['POST'])
 def register():
