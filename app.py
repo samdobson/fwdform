@@ -50,6 +50,8 @@ def forward(uuid):
     result = mandrill_client.messages.send(message=message)
     if result[0]['status'] != 'sent':
         abort(500)
+    if 'next' in request.form:
+        return redirect(request.form['next'])
     return 'Your message was sent successfully'
 
 @app.errorhandler(400)
