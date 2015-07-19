@@ -67,7 +67,7 @@ class SMTPBackend(object):
                 raise Exception("Please set FWDFORM_SMTPUSERNAME and FWDFORM_SMTPPASSWORD environment variables or specify credentials in netrc")
 
 
-        self.username, _, self.pwd = auth
+            self.username, _, self.pwd = auth
 
     def send_message(self, to, from_email, subject, text):
         """Sends a message, returns True on success"""        
