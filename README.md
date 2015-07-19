@@ -40,16 +40,35 @@ NB: Required parameters are: `email`, `name` and `message`. Other parameters wil
 Privacy concerns?
 -----------------
 
-Spin up your own free [Heroku](http://www.heroku.com) instance. A [Mandrill](http://mandrill.com) account required for email delivery.
+Spin up your own free [Heroku](http://www.heroku.com) instance. Email can be delivered via [Mandrill](http://mandrill.com) (An account is required) or
+authenticated SMTP over SSL.
+
+Setup with Mandrill:
 
 ```bash
     $ git clone https://github.com/samdobson/fwdform.git
     $ heroku create
+    $ heroku config:set FWDFORM_BACKEND=mandrill
     $ heroku config:set MANDRILL_API_KEY=<KEY>
     $ heroku addons:add heroku-postgresql:dev
     $ heroku pg:promote HEROKU_POSTGRESQL_COLOR
     $ heroku ps:scale web=1
 ```
+
+Setup with SMTP:
+
+```bash
+    $ git clone https://github.com/samdobson/fwdform.git
+    $ heroku create
+    $ heroku config:set FWDFORM_BACKEND=smtp
+    $ heroku config:set FWDFORM_SMTPHOST=<SMTPHOST>
+    $ heroku config:set FWDFORM_SMTPUSERNAME=<LOGIN>
+    $ heroku config:set FWDFORM_SMTPPASSWORD=<PWD>
+    $ heroku addons:add heroku-postgresql:dev
+    $ heroku pg:promote HEROKU_POSTGRESQL_COLOR
+    $ heroku ps:scale web=1
+```
+
 
 Deploy the application to your Heroku instance.
 
