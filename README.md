@@ -1,6 +1,8 @@
 Quickstart contact form processing
 ----------------------------------
 
+# Update 18-01-18: No longer functional following [Mandrill decision](http://blog.mailchimp.com/important-changes-to-mandrill/) to restrict service to Mailchimp subscribers. Archiving this repo for posterity.
+
 This will be useful if...
 
 * You want to forward a simple contact form to your email
