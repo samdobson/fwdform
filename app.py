@@ -1,15 +1,31 @@
 import os
 from uuid import uuid4
+import logging
 
 from mandrill import Mandrill
 from flask.ext.cors import CORS
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask import Flask, request, redirect, abort
 
+
+from backends import backends
+
+logger = logging.getLogger(__name__)
 app = Flask(__name__)
 cors = CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-mandrill_client = Mandrill(os.environ['MANDRILL_API_KEY'])
+
+logging.basicConfig(level='WARNING' if not os.environ.get('FWDFORM_DEBUG', False) else 'DEBUG')
+
+try:
+    backend_name = os.environ['FWDFORM_BACKEND']
+except KeyError:
+    raise Exception('environment variable FWDFORM_BACKEND has to be set (allowed values: {})'.format(", ".join(backends)))
+if backend_name not in backends:
+    raise Exception('Unknown value for FWDFORM_BACKEND: {} (allowed: {})'.format(backend_name, ", ".join(backends)))
+
+backend = backends[backend_name]()
+
 db = SQLAlchemy(app)
 
 class User(db.Model):
@@ -41,14 +57,12 @@ def forward(uuid):
     user = User.query.filter_by(uuid=uuid).first()
     if not user:
         return ('User not found', 406)
-    message = {
-               'to': [{'email': user.email}],
-               'from_email': request.form['email'],
-               'subject': 'Message from {}'.format(request.form['name']),
-               'text': request.form['message'],
-              }
-    result = mandrill_client.messages.send(message=message)
-    if result[0]['status'] != 'sent':
+
+    send_ok = backend.send_message(to=user.email, 
+                                   from_email=request.form['email'], 
+                                   subject='Message from {}'.format(request.form['name']),
+                                   text=request.form['message'])
+    if not send_ok:
         abort(500)
     if 'next' in request.form:
         return redirect(request.form['next'])
@@ -63,5 +77,6 @@ def bad_parameters(e):
 
 @app.errorhandler(500)
 def error(e):
+    logger.error(e)
     return ('Sorry, something went wrong!', 500)
 
