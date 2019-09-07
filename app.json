@@ -5,11 +5,14 @@
   "logo": "https://app.mailgun.com/assets/pilot/images/mailgun-primary-no-tag-red.svg",
   "keywords": ["email", "contact form", "static"],
   "env": {
-    "MAILGUN_API_KEY": {
-      "description": "Your Mailgun API key."
-    },
     "EMAIL": {
       "description": "Your email address."
+    },
+    "DOMAIN": {
+      "description": "Your Mailgun domain."
+    },
+    "MAILGUN_API_KEY": {
+      "description": "Your Mailgun API key."
     }
   }
 }

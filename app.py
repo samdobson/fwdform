@@ -10,9 +10,8 @@ cors = CORS(app)
 
 @app.route('/', methods=['POST'])
 def send_email():
-    domain = os.environ['email'].split('@')[1]
     result = requests.post(
-        f"https://api.mailgun.net/v3/{domain}/messages",
+        f"https://api.mailgun.net/v3/{os.environ['DOMAIN']}/messages",
         auth=("api", os.environ['MAILGUN_API_KEY']),
         data={"from": request.form['email'],
               "to": [os.environ['EMAIL']],
