@@ -4,7 +4,7 @@ Quickstart contact form processing
 This will be useful if...
 
 * You want to forward a simple contact form to your email
-* You have a (S3) static site and don't want to run a server
+* You have a static site and don't want to run a server
 
 Usage
 -----
