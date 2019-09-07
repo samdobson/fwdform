@@ -13,12 +13,12 @@ Grab a [Mailgun](https://www.mailgun.com) account and make a note of your API ke
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-Create your form like so:
+Then create your form like so:
 
 ```html
-<form action="https://{YOUR_APP_NAME}.herokuapp.com">
-  Email: <input type="text" name="name"><br>
-  Name: <input type="text" name="email"><br>
+<form action="https://{YOUR_APP_NAME}.herokuapp.com" action="POST">
+  Name: <input type="text" name="name"><br>
+  Email: <input type="text" name="email"><br>
   Message: <textarea name="message" cols="40" rows="5"></textarea>
   <input type="submit" value="Send Message">
 </form> 
