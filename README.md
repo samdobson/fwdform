@@ -1,8 +1,6 @@
 Quickstart contact form processing
 ----------------------------------
 
-# Update 18-01-18: No longer functional following [Mandrill decision](http://blog.mailchimp.com/important-changes-to-mandrill/) to restrict service to Mailchimp subscribers. Archiving this repo for posterity.
-
 This will be useful if...
 
 * You want to forward a simple contact form to your email
@@ -11,60 +9,18 @@ This will be useful if...
 Usage
 -----
 
-Register your email:
+Grab a [Mailgun](https://www.mailgun.com) account and make a note of your API key.
 
-```bash
-    $ curl --data "email=<your_email>" https://fwdform.herokuapp.com/register
-    Token: 780a8c9b-dc2d-4258-83af-4deefe446dee
-    
-```
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-Test (optional):
-
-```bash
-    $ curl --data "email=person@form.com&name=person&message=hello" \
-           https://fwdform.herokuapp.com/user/<token>
-```
-
-Put into action:
+Create your form like so:
 
 ```html
-<form action="https://fwdform.herokuapp.com/user/<token>">
+<form action="https://{YOUR_APP_NAME}.herokuapp.com">
   Email: <input type="text" name="name"><br>
   Name: <input type="text" name="email"><br>
   Message: <textarea name="message" cols="40" rows="5"></textarea>
   <input type="submit" value="Send Message">
 </form> 
-```
-
-NB: Required parameters are: `email`, `name` and `message`. Other parameters will be ignored.
-
-Privacy concerns?
------------------
-
-Spin up your own free [Heroku](http://www.heroku.com) instance. A [Mandrill](http://mandrill.com) account required for email delivery.
-
-```bash
-    $ git clone https://github.com/samdobson/fwdform.git
-    $ heroku create
-    $ heroku config:set MANDRILL_API_KEY=<KEY>
-    $ heroku addons:add heroku-postgresql:dev
-    $ heroku pg:promote HEROKU_POSTGRESQL_COLOR
-    $ heroku ps:scale web=1
-```
-
-Deploy the application to your Heroku instance.
-
-```bash
-    $ git push heroku master
-```
-
-Create the database.
-
-```bash
-    $ heroku run python
-    >>> from app import db
-    >>> db.create_all()
-    >>> exit()
 ```
 
