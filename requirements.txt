@@ -6,7 +6,6 @@ idna==2.8
 itsdangerous==1.1.0
 Jinja2==2.10.1
 MarkupSafe==1.1.1
-pkg-resources==0.0.0
 psycopg2==2.8.3
 requests==2.22.0
 urllib3==1.25.3
