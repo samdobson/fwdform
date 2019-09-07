@@ -18,4 +18,4 @@ def send_email():
               "subject": 'Message from ' + request.form['name'],
               "text": request.form['message']})
 
-    return result
+    return result.text
